@@ -10,4 +10,4 @@ A terminal-based banking application that simulates real-world financial transac
 * **Modular Code:** Uses functions to handle specific banking tasks cleanly.
 
 ---
-*Created by Durga Deshmukh | B.Sc. Mathematics & IIT Madras Data Science Student*
+*Created by Durga Deshmukh | B.Sc. Mathematics & IIT Madras BS Data Science Student*
