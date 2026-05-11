@@ -16,5 +16,10 @@ A security-focused script that allows users to encrypt and decrypt messages usin
 * **Randomized Mapping:** Generates a unique key for every session using the `random` module.
 * **Full Character Support:** Handles uppercase, lowercase, numbers, and symbols.
 * **User Interface:** Simple terminal prompts for seamless encryption/decryption.
+
+## Featured Project: Python Slot Machine
+A terminal-based game that simulates a high-stakes slot machine experience.
+* **Dynamic Betting:** Integrated system for managing player balance and wagers.
+* **Probability Logic:** Uses the `random` module to simulate symbol rows.
 ---
 *Created by Durga Deshmukh | B.Sc. Mathematics & IIT Madras BS Data Science Student*
