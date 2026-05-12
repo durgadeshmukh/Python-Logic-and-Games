@@ -1,0 +1,84 @@
+# Animated New Year Wisher Code
+# Decided to start the new year by building...
+
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+import numpy as np
+
+np.random.seed(42)
+
+fig, ax = plt.subplots(figsize=(6,6))
+fig.patch.set_facecolor("#0b132b")
+ax.set_facecolor("#0b132b")
+ax.set_xlim(-1, 1)
+ax.set_ylim(-1, 1)
+ax.axis("off")
+
+fig.patch.set_facecolor('#0b1220')
+
+glow_layers = []
+for i in range(4):
+    circle = plt.Circle(
+        (0, 0),
+        0.35 + i * 0.08,
+        color="#ffd166",
+        alpha=0.06,
+        zorder=0,
+    )
+    ax.add_patch(circle)
+    glow_layers.append(circle)
+
+title = ax.text(
+    0, 0.1, "Hello, 2026", ha='center', va='center', fontsize=28, color="#ffd166", fontweight="bold", alpha=0
+)
+subtitle = ax.text(
+    0, -0.05, "A new year. Same curiosity.", ha='center', va='center', fontsize=15, color="#eaeaea", alpha=0
+)
+signature = ax.text(
+    0, -0.6, "— Durga", ha="center", va="center", fontsize=12, color="#cccccc", alpha=0,
+)
+
+credit = ax.text(
+    0, -0.75, "Built to start the year by creating.", ha="center", va="center", fontsize=9, color="#888888",alpha=0,
+)
+
+n = 120
+x = np.random.uniform(-1, 1, n)
+y = np.random.uniform(-1, 1, n)
+speed = np.random.uniform(0.02, 0.09, n)
+colors = np.random.choice(['#facc15', '#fb7185', '#38bdf8', '#4ade80', '#a78bfa'], size=n)
+sizes = np.random.randint(15, 40, size=n)
+confetti = ax.scatter(x, y, c=colors, s=sizes, alpha=0.85)
+vy = np.random.uniform(0.001, 0.004, n)
+
+def update(frame):
+    global y
+    if frame < 40:
+        confetti.set_alpha(0.3)
+
+    elif frame < 120:  # Reveal & celebration
+        title.set_alpha(min(1, title.get_alpha() + 0.03))
+        subtitle.set_alpha(min(1, subtitle.get_alpha() + 0.03))
+        confetti.set_alpha(0.85)
+
+    else:  # Slow ending
+        signature.set_alpha(min(1, signature.get_alpha() + 0.02))
+        credit.set_alpha(min(1, credit.get_alpha() + 0.02))
+        confetti.set_alpha(0.5)
+
+    y -= vy 
+    y[y < -1] = 1
+
+    confetti.set_offsets(np.c_[x, y])
+    pulse = 0.02 * np.sin(frame / 15)
+    for i, circle in enumerate(glow_layers):
+        circle.set_radius(0.35 + i * 0.08 + pulse)
+    return title, subtitle, signature, credit, confetti, glow_layers
+
+ani = FuncAnimation(
+    fig, update, frames=180, interval=50
+)
+
+plt.show()
+ani.save("hello_2026.gif", writer="pillow", fps=25)
+print("Saved as hello_2026.gif")
